@@ -1,0 +1,1 @@
+import{A as e}from"./index-N8tV-dP4.js";import{t}from"./auth-form-Ba2-oXPa.js";var n=e();function r(){return(0,n.jsx)(t,{mode:`signup`})}export{r as component};
