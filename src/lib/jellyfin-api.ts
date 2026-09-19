@@ -83,7 +83,7 @@ export const jellyfinConnect = createServerFn({ method: "POST" })
         username: String(user.Name || data.username),
         baseUrl,
       };
-    } catch (err) {
+    } catch {
       return {
         ok: false as const,
         error: genericProviderError("Could not reach that Jellyfin library from here."),
@@ -116,7 +116,7 @@ export const jellyfinListSections = createServerFn({ method: "POST" })
         }))
         .filter((s) => s.key);
       return { ok: true as const, sections };
-    } catch (err) {
+    } catch {
       return {
         ok: false as const,
         error: genericProviderError("Could not list Jellyfin libraries."),
@@ -177,7 +177,7 @@ export const jellyfinImportSections = createServerFn({ method: "POST" })
       const seen = new Set<string>();
       const unique = titles.filter((t) => (seen.has(t.id) ? false : (seen.add(t.id), true)));
       return { ok: true as const, titles: unique };
-    } catch (err) {
+    } catch {
       return {
         ok: false as const,
         error: genericProviderError("Could not import that Jellyfin library."),

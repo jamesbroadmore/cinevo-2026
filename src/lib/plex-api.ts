@@ -69,7 +69,7 @@ export const plexStartPin = createServerFn({ method: "POST" })
       const code = String(body.code || "");
       if (!id || !code) return { ok: false as const, error: "Plex did not issue a sign-in pin." };
       return { ok: true as const, id, code };
-    } catch (err) {
+    } catch {
       return { ok: false as const, error: genericProviderError("Could not start Plex sign-in.") };
     }
   });
@@ -90,7 +90,7 @@ export const plexPollPin = createServerFn({ method: "POST" })
       )) as Record<string, unknown>;
       const token = typeof body.authToken === "string" ? body.authToken : "";
       return { ok: true as const, token: token || null };
-    } catch (err) {
+    } catch {
       return { ok: false as const, error: genericProviderError("Plex sign-in timed out.") };
     }
   });
@@ -115,7 +115,7 @@ export const plexListServers = createServerFn({ method: "POST" })
         username: String(user.username || user.title || user.email || "Plex"),
         servers,
       };
-    } catch (err) {
+    } catch {
       return { ok: false as const, error: genericProviderError("Could not list Plex servers.") };
     }
   });
@@ -151,7 +151,7 @@ export const plexOpenServer = createServerFn({ method: "POST" })
           kind: conn.relay ? "relay" : conn.local ? "local" : "remote",
           sections,
         };
-      } catch (err) {
+      } catch {
         last = genericProviderError("Could not reach that Plex server from here.");
       }
     }
@@ -172,7 +172,7 @@ export const plexImportSections = createServerFn({ method: "POST" })
     try {
       for (const key of data.sectionKeys.slice(0, 12)) {
         const body = await plexJson(
-          `${data.uri}/library/sections/${encodeURIComponent(key)}/all?X-Plex-Container-Start=0&X-Plex-Container-Size=80`,
+          `${uri}/library/sections/${encodeURIComponent(key)}/all?X-Plex-Container-Start=0&X-Plex-Container-Size=80`,
           headers,
           12000,
         );
@@ -181,7 +181,7 @@ export const plexImportSections = createServerFn({ method: "POST" })
       const seen = new Set<string>();
       const unique = titles.filter((t) => (seen.has(t.id) ? false : (seen.add(t.id), true)));
       return { ok: true as const, titles: unique };
-    } catch (err) {
+    } catch {
       return { ok: false as const, error: genericProviderError("Could not import that Plex library.") };
     }
   });
