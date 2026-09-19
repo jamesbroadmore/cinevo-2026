@@ -14,6 +14,7 @@ export function Mark({ className, title }: { className?: string; title?: string 
     <svg
       viewBox="0 0 240 240"
       className={cn("brand__mark", className)}
+      style={{ borderRadius: "24px" }}
       aria-hidden={title ? undefined : true}
       role={title ? "img" : undefined}
     >
