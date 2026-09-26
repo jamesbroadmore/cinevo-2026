@@ -43,9 +43,6 @@ function Home() {
   return (
     <div className="public-home">
       <header className="public-nav">
-        <Link to="/" className="public-brand" aria-label="CINEVO home">
-          <Logo size="md" />
-        </Link>
         <nav aria-label="Homepage">
           <a href="#how">How it works</a>
           <a href="#features">Features</a>
@@ -66,6 +63,9 @@ function Home() {
           <img src="/stills/hero-theater.jpg" alt="" className="public-hero__still" />
           <div className="public-hero__veil" />
           <div className="public-hero__content">
+            <div className="public-hero__logo" aria-label="CINEVO">
+              <Logo size="xl" tagline />
+            </div>
             <span className="public-kicker">Private cinema</span>
             <h1 id="public-hero-title">
               Your movies.
