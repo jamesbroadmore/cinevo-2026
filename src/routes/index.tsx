@@ -62,6 +62,13 @@ function Home() {
         <section className="public-hero" aria-labelledby="public-hero-title">
           <img src="/stills/hero-theater.jpg" alt="" className="public-hero__still" />
           <div className="public-hero__veil" />
+          <div className="public-hero__motion" aria-hidden="true">
+            <div className="public-hero__motion-track">
+              {["projector.jpg", "neon-alley.jpg", "screen-glow.jpg", "theater.jpg", "doorway.jpg"].map((still) => (
+                <img key={still} src={`/stills/${still}`} alt="" />
+              ))}
+            </div>
+          </div>
           <div className="public-hero__content">
             <div className="public-hero__logo" aria-label="CINEVO">
               <Logo size="xl" tagline />
