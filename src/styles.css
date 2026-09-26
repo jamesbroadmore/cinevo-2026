@@ -298,9 +298,25 @@ html[data-theme="aurora"] {
   position: relative;
   isolation: isolate;
   display: flex;
-  min-height: min(44rem, 92svh);
+  min-height: min(48rem, 94svh);
   align-items: flex-end;
+  overflow: hidden;
   padding: clamp(6.5rem, 14vh, 9rem) clamp(1.25rem, 6vw, 6rem) clamp(4rem, 10vh, 6.5rem);
+}
+.public-hero::after {
+  position: absolute;
+  z-index: -1;
+  inset: -20% -30%;
+  background: linear-gradient(108deg, transparent 42%, rgb(85 207 255 / 7%) 48%, rgb(255 77 165 / 12%) 50%, transparent 57%);
+  content: "";
+  pointer-events: none;
+  transform: translateX(-65%) skewX(-12deg);
+  animation: cinevo-hero-sweep 9s ease-in-out 1.5s infinite;
+}
+@keyframes cinevo-hero-sweep {
+  0%, 18% { transform: translateX(-65%) skewX(-12deg); opacity: 0; }
+  35%, 64% { opacity: 1; }
+  82%, 100% { transform: translateX(65%) skewX(-12deg); opacity: 0; }
 }
 .public-hero__still {
   position: absolute;
@@ -330,7 +346,23 @@ html[data-theme="aurora"] {
   width: max-content;
   height: 100%;
   animation: cinevo-hero-reel 34s linear infinite;
+  will-change: transform;
 }
+.public-hero__motion::before,
+.public-hero__motion::after {
+  position: absolute;
+  z-index: 2;
+  width: 12rem;
+  height: 12rem;
+  border: 1px solid rgb(85 207 255 / 22%);
+  border-radius: 50%;
+  content: "";
+  pointer-events: none;
+  animation: cinevo-orbit 11s linear infinite;
+}
+.public-hero__motion::before { top: -5rem; right: 12%; box-shadow: 0 0 4rem rgb(85 207 255 / 18%); }
+.public-hero__motion::after { right: 32%; bottom: -7rem; width: 18rem; height: 18rem; border-color: rgb(255 77 165 / 18%); animation-direction: reverse; animation-duration: 15s; }
+@keyframes cinevo-orbit { to { transform: rotate(360deg) translateX(1.25rem) rotate(-360deg); } }
 .public-hero__motion img {
   width: clamp(11rem, 18vw, 17rem);
   height: 100%;
@@ -389,6 +421,50 @@ html[data-theme="aurora"] {
 .public-hero__logo small {
   font-size: clamp(0.62rem, 1.2vw, 0.78rem);
   letter-spacing: 0.22em;
+}
+.public-hero__content > .public-kicker,
+.public-hero__content > h1,
+.public-hero__content > p,
+.public-hero__content > .public-hero__actions,
+.public-hero__content > .public-hero__points {
+  animation: cinevo-hero-copy-in 800ms var(--ease-cine) both;
+}
+.public-hero__content > .public-kicker { animation-delay: 220ms; }
+.public-hero__content > h1 { animation-delay: 320ms; }
+.public-hero__content > p { animation-delay: 420ms; }
+.public-hero__content > .public-hero__actions { animation-delay: 520ms; }
+.public-hero__content > .public-hero__points { animation-delay: 620ms; }
+@keyframes cinevo-hero-copy-in {
+  from { opacity: 0; transform: translateY(1rem); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.public-hero h1 em {
+  background: linear-gradient(100deg, var(--color-cine-cyan), #fff 45%, var(--color-cine-pink));
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+  background-size: 220% auto;
+  animation: cinevo-title-shimmer 7s ease-in-out infinite;
+}
+@keyframes cinevo-title-shimmer {
+  0%, 100% { background-position: 0% center; }
+  50% { background-position: 100% center; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .public-hero::after,
+  .public-hero__motion::before,
+  .public-hero__motion::after,
+  .public-hero__motion-track,
+  .public-hero__logo,
+  .public-hero__logo .brand__mark,
+  .public-hero__content > .public-kicker,
+  .public-hero__content > h1,
+  .public-hero__content > p,
+  .public-hero__content > .public-hero__actions,
+  .public-hero__content > .public-hero__points,
+  .public-hero h1 em {
+    animation: none;
+  }
 }
 @keyframes cinevo-hero-logo-in {
   from { opacity: 0; transform: translateY(1.25rem) scale(0.94); }
