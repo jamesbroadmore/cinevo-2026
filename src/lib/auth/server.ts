@@ -103,10 +103,26 @@ const LOCAL_DEV_ORIGINS: string[] = [
   "http://127.0.0.1:8080",
   "http://[::1]:8080",
 ];
+const previewRuntimeOrigins = [
+  env("V0_RUNTIME_URL"),
+  env("V0_DEV_APP_URL"),
+  env("V0_BUILD_URL"),
+  env("V0_SANDBOX_URL"),
+].filter((value): value is string => Boolean(value));
+const previewRuntimeHosts = previewRuntimeOrigins.flatMap((value) => {
+  try {
+    return [new URL(value).hostname];
+  } catch {
+    return [];
+  }
+});
+
 const baseURL = explicitBaseURL ?? {
-  // Include loopback hosts so dynamic baseURL resolves for local email/password
-  // (not only the preview wildcard).
-  allowedHosts: [...previewAllowedHosts, "localhost", "127.0.0.1", "[::1]"],
+  // Include loopback hosts and the exact v0 runtime host so dynamic baseURL
+  // resolves for local and hosted email/password requests.
+  allowedHosts: [
+    ...new Set([...previewAllowedHosts, ...previewRuntimeHosts, "localhost", "127.0.0.1", "[::1]"]),
+  ],
   // `auto` → trust both http:// and https:// expansions of allowedHosts
   // (preview is https; local dev is http).
   protocol: "auto" as const,
@@ -116,12 +132,13 @@ const baseURL = explicitBaseURL ?? {
 // Origins Better Auth accepts on credentialed POSTs (sign-up/sign-in, etc.).
 // Missing entries here surface as FORBIDDEN "Invalid origin".
 const trustedOrigins: string[] = explicitBaseURL
-  ? [explicitBaseURL, ...LOCAL_DEV_ORIGINS]
+  ? [explicitBaseURL, ...previewRuntimeOrigins, ...LOCAL_DEV_ORIGINS]
   : [
       // Host wildcards (matched against Origin's host)
       ...previewAllowedHosts,
       // Full-origin wildcards (matched against Origin)
       ...previewAllowedHosts.flatMap((host) => [`https://${host}`, `http://${host}`]),
+      ...previewRuntimeOrigins,
       ...LOCAL_DEV_ORIGINS,
     ];
 
@@ -222,7 +239,14 @@ export const auth = betterAuth({
   // `http://localhost`, so local dev still works.)
   advanced: {
     useSecureCookies: false,
-    defaultCookieAttributes: { secure: true, sameSite: "lax", path: "/" },
+    defaultCookieAttributes: {
+      secure: true,
+      sameSite: "lax",
+      path: "/",
+      ...(process.env.NODE_ENV === "development"
+        ? { sameSite: "none" as const, secure: true }
+        : {}),
+    },
     cookies: {
       session_token: { name: SESSION_TOKEN_COOKIE },
       session_data: { name: "__Host-grok-auth.session_data" },
