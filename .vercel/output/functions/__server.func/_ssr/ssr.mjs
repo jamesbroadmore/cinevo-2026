@@ -134,7 +134,7 @@ var HEADERS = { TSS_SHELL: "X-TSS_SHELL" };
 * the dev styles URL for route-scoped CSS collection.
 */
 async function getStartManifest(matchedRoutes) {
-	const { tsrStartManifest } = await import("../_tanstack-start-manifest_v-7N7hdfOO.mjs");
+	const { tsrStartManifest } = await import("../_tanstack-start-manifest_v-Mi0rgGZO.mjs");
 	const startManifest = tsrStartManifest();
 	let routes = startManifest.routes;
 	routes[rootRouteId];
@@ -156,35 +156,35 @@ async function getStartManifest(matchedRoutes) {
 var manifest = {
 	"3b4bb4c4449e4f7cbed728d66d982ae6de5dcd43acca1136797adc964162c2ee": {
 		functionName: "plexOpenServer_createServerFn_handler",
-		importer: () => import("./plex-api-CqfyjRU9.mjs")
+		importer: () => import("./plex-api-DZKaX7ti.mjs")
 	},
 	"4cc0050032cddacf64896ace65373bea6350bc6f2b129b5d89fcedb99eb55a5a": {
 		functionName: "saveAccountState_createServerFn_handler",
-		importer: () => import("./account-state-o5RHulFT.mjs")
+		importer: () => import("./account-state-ChLehQ_6.mjs")
 	},
 	"7ebb63b2bc6bc267a35ed0fda7ece5b3241b752253db5bd836ae7020e8c799f4": {
 		functionName: "askCinevo_createServerFn_handler",
-		importer: () => import("./ask-cinevo-EwCEQD_O.mjs")
+		importer: () => import("./ask-cinevo-D_l6Rv7j.mjs")
 	},
 	"81e82ee8c48e302a7ffa0948ac4c34b39446b0786af444c9ff6b7d56235208a4": {
 		functionName: "loadAccountState_createServerFn_handler",
-		importer: () => import("./account-state-o5RHulFT.mjs")
+		importer: () => import("./account-state-ChLehQ_6.mjs")
 	},
 	"8fdebd237b20b8988d4b74313d86857020fb83c844c4c09a52255338ac0a62c2": {
 		functionName: "plexStartPin_createServerFn_handler",
-		importer: () => import("./plex-api-CqfyjRU9.mjs")
+		importer: () => import("./plex-api-DZKaX7ti.mjs")
 	},
 	"a2c3c4f890996a4f965cfe90be75b904e1ef7c0d41c7a73da07e74c8d6682ac0": {
 		functionName: "plexImportSections_createServerFn_handler",
-		importer: () => import("./plex-api-CqfyjRU9.mjs")
+		importer: () => import("./plex-api-DZKaX7ti.mjs")
 	},
 	"b1a629896a5a292418e73f888427598ab0a902c8f963c938f2e4cd8a5ed40586": {
 		functionName: "plexPollPin_createServerFn_handler",
-		importer: () => import("./plex-api-CqfyjRU9.mjs")
+		importer: () => import("./plex-api-DZKaX7ti.mjs")
 	},
 	"fe32bd140d3583c344ef891531d16c93349abb6d1e02a5fadc3e79e692953852": {
 		functionName: "plexListServers_createServerFn_handler",
-		importer: () => import("./plex-api-CqfyjRU9.mjs")
+		importer: () => import("./plex-api-DZKaX7ti.mjs")
 	}
 };
 async function getServerFnById(id, access) {
@@ -1428,7 +1428,7 @@ var getBaseManifest = getProdBaseManifest;
 var createEarlyHintsForRequest = createEarlyHintsCollector;
 async function loadEntries() {
 	const [routerEntry, startEntry, pluginAdapters] = await Promise.all([
-		import("./router-OgdeCCns.mjs").then((n) => n.t),
+		import("./router-Dz2SIf1d.mjs").then((n) => n.t),
 		import("./start-BUXWgzSn.mjs"),
 		import("./empty-plugin-adapters-D9UWiqvJ.mjs")
 	]);

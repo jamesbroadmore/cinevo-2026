@@ -533,6 +533,46 @@ var Monitor = createLucideIcon("monitor", [
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
 */
+var Palette = createLucideIcon("palette", [
+	["path", {
+		d: "M12 22a1 1 0 0 1 0-20 10 9 0 0 1 10 9 5 5 0 0 1-5 5h-2.25a1.75 1.75 0 0 0-1.4 2.8l.3.4a1.75 1.75 0 0 1-1.4 2.8z",
+		key: "e79jfc"
+	}],
+	["circle", {
+		cx: "13.5",
+		cy: "6.5",
+		r: ".5",
+		fill: "currentColor",
+		key: "1okk4w"
+	}],
+	["circle", {
+		cx: "17.5",
+		cy: "10.5",
+		r: ".5",
+		fill: "currentColor",
+		key: "f64h9f"
+	}],
+	["circle", {
+		cx: "6.5",
+		cy: "12.5",
+		r: ".5",
+		fill: "currentColor",
+		key: "qy21gx"
+	}],
+	["circle", {
+		cx: "8.5",
+		cy: "7.5",
+		r: ".5",
+		fill: "currentColor",
+		key: "fotxhn"
+	}]
+]);
+/**
+* @license lucide-react v0.510.0 - ISC
+*
+* This source code is licensed under the ISC license.
+* See the LICENSE file in the root directory of this source tree.
+*/
 var Pause = createLucideIcon("pause", [["rect", {
 	x: "14",
 	y: "4",
@@ -948,4 +988,4 @@ var X = createLucideIcon("x", [["path", {
 	key: "d8bk6v"
 }]]);
 //#endregion
-export { HardDrive as A, ArrowRight as B, ListPlus as C, KeyRound as D, LibraryBig as E, Download as F, CircleCheck as I, ChevronLeft as L, FolderOpen as M, Film as N, House as O, Expand as P, Check as R, LoaderCircle as S, Link2 as T, ArrowLeft as V, RefreshCw as _, Tv as a, Monitor as b, Star as c, Shield as d, ShieldCheck as f, Search as g, Server as h, Unplug as i, FolderPlus as j, Heart as k, Smartphone as l, Settings2 as m, VolumeX as n, TriangleAlert as o, Share2 as p, Volume2 as r, Trash2 as s, X as t, Shuffle as u, Play as v, ListChecks as w, Menu as x, Pause as y, Captions as z };
+export { Heart as A, Captions as B, LoaderCircle as C, LibraryBig as D, Link2 as E, Expand as F, ArrowLeft as H, Download as I, CircleCheck as L, FolderPlus as M, FolderOpen as N, KeyRound as O, Film as P, ChevronLeft as R, Menu as S, ListChecks as T, ArrowRight as V, RefreshCw as _, Tv as a, Palette as b, Star as c, Shield as d, ShieldCheck as f, Search as g, Server as h, Unplug as i, HardDrive as j, House as k, Smartphone as l, Settings2 as m, VolumeX as n, TriangleAlert as o, Share2 as p, Volume2 as r, Trash2 as s, X as t, Shuffle as u, Play as v, ListPlus as w, Monitor as x, Pause as y, Check as z };

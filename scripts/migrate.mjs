@@ -31,7 +31,7 @@ const migrationsDir = join(dirname(fileURLToPath(import.meta.url)), "..", "migra
 async function main() {
   let entries;
   try {
-    entries = await readdir(migrationsDir);
+    entries = await readdir(migrationsDir, { recursive: true });
   } catch {
     console.log("[migrate] no migrations/ directory — nothing to do.");
     return;
