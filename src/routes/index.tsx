@@ -1,5 +1,6 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { ArrowRight, FolderOpen, Play, Server, Shield } from "lucide-react";
+import { useEffect, useState } from "react";
+import { ArrowRight, FolderOpen, Palette, Play, Server, Shield } from "lucide-react";
 import { InstallerCards } from "@/components/cinevo/installers";
 import { Logo } from "@/components/cinevo/logo";
 import { PlatformDownloads } from "@/components/cinevo/platform-downloads";
@@ -24,6 +25,14 @@ const STEPS = [
   },
 ];
 
+const THEMES = [
+  { id: "pulse", label: "Pulse", tone: "Electric violet" },
+  { id: "nova", label: "Nova", tone: "Midnight cyan" },
+  { id: "ember", label: "Ember", tone: "Cinema pink" },
+  { id: "graphite", label: "Graphite", tone: "Studio steel" },
+  { id: "aurora", label: "Aurora", tone: "Northern glow" },
+] as const;
+
 const FEATURES = [
   {
     t: "Your files stay yours",
@@ -40,6 +49,12 @@ const FEATURES = [
 ];
 
 function Home() {
+  const [theme, setTheme] = useState<(typeof THEMES)[number]["id"]>("pulse");
+
+  useEffect(() => {
+    document.documentElement.dataset.theme = theme;
+  }, [theme]);
+
   return (
     <div className="public-home">
       <header className="public-nav">
@@ -49,6 +64,20 @@ function Home() {
           <Link to="/node">Node</Link>
         </nav>
         <div className="public-nav__actions">
+          <div className="theme-picker" role="group" aria-label="Choose visual theme">
+            <Palette size={15} aria-hidden="true" />
+            <span className="sr-only">Choose visual theme</span>
+            {THEMES.map((option) => (
+              <button
+                key={option.id}
+                type="button"
+                className={`theme-picker__swatch theme-picker__swatch--${option.id}`}
+                aria-label={`${option.label} theme: ${option.tone}`}
+                aria-pressed={theme === option.id}
+                onClick={() => setTheme(option.id)}
+              />
+            ))}
+          </div>
           <Link to="/login" className="public-nav__login">
             Log in
           </Link>
